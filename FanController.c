@@ -1,5 +1,5 @@
 /*
- * main.c
+ * FanController.c
  *
  *  Created on: Feb 19, 2024
  *      Author: Shamel Radwan
@@ -13,7 +13,6 @@
 #include "MCAL/gpio.h"
 
 
-#define STRINGIFY(x) #x
 
 int main(void)
 
@@ -31,10 +30,9 @@ int main(void)
 	LCD_init();
 
 
-	GPIO_setupPinDirection(PORTB_ID,PIN3_ID,PIN_OUTPUT);
 	DcMotor_Init();
 
-	LCD_moveCursor(0,4);
+	LCD_moveCursor(0,1);
 	LCD_displayString("FAN is ");
 
 	LCD_moveCursor(1,4);
@@ -47,52 +45,46 @@ int main(void)
 	{
 		temp = LM35_getTemperature();
 
-		LCD_moveCursor(1,9);
+		LCD_moveCursor(0,8);
 
 
 		if (temp < 30)
 		{
-			LCD_moveCursor(0,11);
-			LCD_displayString(STRINGIFY(OFF));
+			LCD_displayString("OFF(0%)");
+			LCD_displayCharacter(' ');
+
 			DcMotor_Rotate(ACW,0);
-			LCD_moveCursor(1,9);
 
 		}
 		else if (temp >= 30 && temp <60)
 		{
-			LCD_moveCursor(0,11);
-			LCD_displayString(STRINGIFY(ON));
+			LCD_displayString("ON(25%)");
 			LCD_displayCharacter(' ');
 			DcMotor_Rotate(CW,25);
-			LCD_moveCursor(1,9);
 
 		}
 		else if (temp >= 60 && temp <90)
 		{
-			LCD_moveCursor(0,11);
-			LCD_displayString(STRINGIFY(ON));
+			LCD_displayString("ON(50%)");
 			LCD_displayCharacter(' ');
 			DcMotor_Rotate(CW,50);
-			LCD_moveCursor(1,9);		}
+		}
 
 		else if (temp >= 90 && temp <120)
 		{
-			LCD_moveCursor(0,11);
-			LCD_displayString(STRINGIFY(ON));
+			LCD_displayString("ON(75%)");
 			LCD_displayCharacter(' ');
 			DcMotor_Rotate(CW,75);
-			LCD_moveCursor(1,9);
 		}
 
 		else if (temp >=120)
 		{
-			LCD_moveCursor(0,11);
-			LCD_displayString(STRINGIFY(ON));
+			LCD_displayString("ON(100%)");
 			LCD_displayCharacter(' ');
 			DcMotor_Rotate(CW,100);
-			LCD_moveCursor(1,9);
 		}
 
+		LCD_moveCursor(1,9);
 
 
 

@@ -15,7 +15,7 @@
 
 #include "../Atmega32_Registers.h"
 
-
+#define MAX_COMPARE 255
 /*******************************************************************************
  *                                Definitions                                  *
  *******************************************************************************/
@@ -27,4 +27,4 @@
 
  *
  */
-void Timer0_Fast_PWM_Init(uint8 duty_cycle);
+void PWM_Timer0_Start(uint8 duty_cycle);

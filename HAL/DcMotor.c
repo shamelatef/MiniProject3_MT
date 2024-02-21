@@ -47,7 +47,7 @@ void DcMotor_Rotate(DcMotor_State state,uint8 speed)
 
 	}
 	/*Motor speed*/
-	Timer0_Fast_PWM_Init(speed);
+	PWM_Timer0_Start(speed);
 }
 
 
